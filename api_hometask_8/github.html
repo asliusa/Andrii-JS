@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Github user info</h1>
+<p>Input some name</p>
+  <input name="user_name" type="text" value="asliusa"  maxlength="512" id='user_nm' class="searchField"/>
+  <button onclick="onClick(this)">Search</button>
+
+<ul>
+ 
+</ul>
+
+<p>
+<script>
+ function onClick(elem) {
+   const list = document.querySelector("ul");
+   list.innerHTML = ``;
+   var username = document.getElementById('user_nm').value; 
+   const github_url = 'https://api.github.com/users/';
+   const promise = fetch(github_url+username);
+   console.log(github_url+document.getElementById('user_nm').value);
+   
+   promise
+    .then( res => { return res.json(); } )
+    .then( data => { 
+      console.log(data.avatar_url);
+      list.innerHTML+= `<li>${data.name}</li>`;
+      list.innerHTML+= `<li><img src='${data.avatar_url}'></li>`;
+      list.innerHTML+= `<li>${data.city}</li>`;
+      list.innerHTML+= `<li>${data.county}</li>`;
+      list.innerHTML+= `<li>${data.email}</li>`;
+      list.innerHTML+= `<li>${data.public_repos}</li>`;   
+    } );
+ };
+</script>
+</p>
+
+</body>
+</html>
