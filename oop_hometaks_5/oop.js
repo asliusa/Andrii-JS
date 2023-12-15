@@ -49,7 +49,7 @@ class Marker {
   #colorAttr;
   #inkAmount;
 
-  constructor(color,) {
+  constructor(color) {
     this.colorAttr = color;
     this.inkAmount = 100;
   }
@@ -68,12 +68,18 @@ class Marker {
       if (message[i] !== ' ') {
         console.log(message[i]);
         this.inkAmount-=10;
-        i++
       }
-    } while (this.inkAmount > 0);
+      i++;
+    } while (this.ink() > 0);
   }
   
 }
 
-m = new Marker('Green')
+class RefillableMarker extends Marker {
+  refill() {
+    this.inkAmount = 100;
+  }   
+}
+
+m = new RefillableMarker('Green')
 m.printText('I am very awesome JS programmer')
